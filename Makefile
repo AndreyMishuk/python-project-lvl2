@@ -11,4 +11,4 @@ publish:
 	poetry publish --dry-run
 
 package-install:
-	python3 -m pip install --force-reinstal --user dist/*.wh1
+	python3 -m pip install --force-reinstal --user dist/*.whl
