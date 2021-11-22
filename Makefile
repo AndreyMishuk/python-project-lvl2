@@ -15,3 +15,6 @@ publish:
 
 package-install:
 	python3 -m pip install --force-reinstal --user dist/*.whl
+
+lint:
+	poetry run flake8 gendiff
