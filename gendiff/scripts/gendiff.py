@@ -51,20 +51,19 @@ def generated_diff(first_file, second_file):
         key_minus_plus = (
             [key
                 for key in dict_file1
-                if key in dict_file2
-                and dict_file1[key] != dict_file2[key]
+                if key in dict_file2 and dict_file1[key] != dict_file2[key]
              ]
         )
 
-    dict_result.update({'- '+str(key): dict_file1[key]
+    dict_result.update({'- ' + str(key): dict_file1[key]
                         for key in key_minus})
-    dict_result.update({'  '+str(key): dict_file1[key]
+    dict_result.update({'  ' + str(key): dict_file1[key]
                         for key in key_0})
-    dict_result.update({'- '+str(key): dict_file1[key]
+    dict_result.update({'- ' + str(key): dict_file1[key]
                         for key in key_minus_plus})
-    dict_result.update({'+ '+str(key): dict_file2[key]
+    dict_result.update({'+ ' + str(key): dict_file2[key]
                         for key in key_minus_plus})
-    dict_result.update({'+ '+str(key): dict_file2[key]
+    dict_result.update({'+ ' + str(key): dict_file2[key]
                         for key in key_plus})
 
     sorted_dict_result = dict(
