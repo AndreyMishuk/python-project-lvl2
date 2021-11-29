@@ -55,16 +55,15 @@ def generated_diff(first_file, second_file):
              ]
         )
 
-    dict_result.update({'- ' + str(key): dict_file1[key]
-                        for key in key_minus})
-    dict_result.update({'  ' + str(key): dict_file1[key]
-                        for key in key_0})
-    dict_result.update({'- ' + str(key): dict_file1[key]
-                        for key in key_minus_plus})
-    dict_result.update({'+ ' + str(key): dict_file2[key]
-                        for key in key_minus_plus})
-    dict_result.update({'+ ' + str(key): dict_file2[key]
-                        for key in key_plus})
+    update_dict(dict_result, dict_file1, key_minus, '- ')
+
+    update_dict(dict_result, dict_file1, key_0, '  ')
+
+    update_dict(dict_result, dict_file1, key_minus_plus, '- ')
+
+    update_dict(dict_result, dict_file2, key_minus_plus, '+ ')
+
+    update_dict(dict_result, dict_file2, key_plus, '+ ')
 
     sorted_dict_result = dict(
         sorted(
@@ -76,6 +75,11 @@ def generated_diff(first_file, second_file):
     )
 
     return json.dumps(sorted_dict_result, indent=4)
+
+
+def update_dict(dict_res, dict_file, list_key, token):
+    dict_res.update({token + str(key): dict_file[key]
+                     for key in list_key})
 
 
 if __name__ == '__main__':
