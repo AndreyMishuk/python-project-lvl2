@@ -27,4 +27,4 @@ jobs:
           make lint
       - name: Run tests
         run: |
-          make run_tests
+          python3 -m pytest --cov
