@@ -20,4 +20,4 @@ lint:
 	poetry run flake8 gendiff
 
 run_tests:
-	python3 -m pytest --cov
+	poetry run pytest --cov
