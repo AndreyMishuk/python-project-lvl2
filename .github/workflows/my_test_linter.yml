@@ -27,4 +27,4 @@ jobs:
           make lint
       - name: Run tests
         run: |
-          poetry run pytest -v
+          make run_tests
