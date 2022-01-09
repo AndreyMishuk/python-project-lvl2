@@ -9,7 +9,7 @@ authors = ["AndreyMishuk <andreygim.am@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pytest = "^6.2.5"
+pytest = "6.2.5"
 pytest-cov = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
