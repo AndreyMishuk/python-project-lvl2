@@ -83,7 +83,7 @@ def update_dict(dict_res, dict_file, list_key, token):
 
 
 def parser_dict_to_string(_dict):
-    result_str = "{" + '\n'
+    result_str = "{\n"
     for key, value in _dict.items():
         result_str += f'  {str(key).lower()}: {str(value).lower()}\n'
     result_str += "}"
