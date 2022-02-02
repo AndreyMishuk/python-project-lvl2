@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-import json
 import argparse
+from gendiff.scripts.parsers import parser_dict2string
+from gendiff.scripts.parsers import parser_file2dict
 
 
 def main():
@@ -22,38 +23,36 @@ def generated_diff(first_file, second_file):
 
     dict_result = {}
 
-    with open(first_file) as file1, open(second_file) as file2:
+    dict_file1 = parser_file2dict(first_file)
+    dict_file2 = parser_file2dict(second_file)
 
-        dict_file1 = json.load(file1)
-        dict_file2 = json.load(file2)
+    key_minus = (
+        [key
+            for key in dict_file1
+            if key not in dict_file2
+         ]
+    )
 
-        key_minus = (
-            [key
-                for key in dict_file1
-                if key not in dict_file2
-             ]
-        )
+    key_0 = (
+        [key
+            for key in dict_file1
+            if key in dict_file2 and dict_file1[key] == dict_file2[key]
+         ]
+    )
 
-        key_0 = (
-            [key
-                for key in dict_file1
-                if key in dict_file2 and dict_file1[key] == dict_file2[key]
-             ]
-        )
+    key_plus = (
+        [key
+            for key in dict_file2
+            if key not in dict_file1
+         ]
+    )
 
-        key_plus = (
-            [key
-                for key in dict_file2
-                if key not in dict_file1
-             ]
-        )
-
-        key_minus_plus = (
-            [key
-                for key in dict_file1
-                if key in dict_file2 and dict_file1[key] != dict_file2[key]
-             ]
-        )
+    key_minus_plus = (
+        [key
+            for key in dict_file1
+            if key in dict_file2 and dict_file1[key] != dict_file2[key]
+         ]
+    )
 
     update_dict(dict_result, dict_file1, key_minus, '- ')
 
@@ -74,20 +73,12 @@ def generated_diff(first_file, second_file):
         )
     )
 
-    return parser_dict_to_string(sorted_dict_result)
+    return parser_dict2string(sorted_dict_result)
 
 
 def update_dict(dict_res, dict_file, list_key, token):
     dict_res.update({token + str(key): dict_file[key]
                      for key in list_key})
-
-
-def parser_dict_to_string(_dict):
-    result_str = "{\n"
-    for key, value in _dict.items():
-        result_str += f'  {str(key).lower()}: {str(value).lower()}\n'
-    result_str += "}"
-    return result_str
 
 
 if __name__ == '__main__':
