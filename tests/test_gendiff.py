@@ -15,5 +15,5 @@ def test_generated_diff():
           as file_result):
         result_str = file_result.read()
 
-    assert diff_str_json == result_str.strip()
-    assert diff_str_yaml == result_str.strip()
+        assert diff_str_json == result_str.strip()
+        assert diff_str_yaml == result_str.strip()
